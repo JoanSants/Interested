@@ -1,0 +1,7 @@
+footer.page-footer {
+    background-color: #800000;
+}
+
+footer.page-footer:hover {
+    background-color: #560000;
+}
