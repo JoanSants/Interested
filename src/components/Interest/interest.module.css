@@ -1,0 +1,17 @@
+.Card{
+    width: 28%;
+    display: inline-block;
+    margin: 15px;
+}
+
+@media(max-width:500px){
+    .Card{
+        width: 100%
+    }
+}
+
+@media(min-width:500px) and (max-width:800px){
+    .Card{
+        width: 40%
+    }
+}
