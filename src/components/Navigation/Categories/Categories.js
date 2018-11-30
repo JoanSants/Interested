@@ -1,33 +1,21 @@
 import React, { Component } from 'react';
-import axios from '../../../axios';
 import { Dropdown, Button } from 'react-materialize';
+import { connect } from 'react-redux';
 
 import Category from './Category/Category';
+import * as actions from '../../../store/actions/index'
 
 class Categories extends Component {
 
-    state = {
-        categories: [],
-        error: false
-    }
-
-    componentDidMount() {
-        axios.get( '/categories' )
-            .then( response => {
-                const categories = response.data.categories;
-                this.setState({categories: categories});
-            } )
-            .catch(error => {
-                console.log(error);
-                this.setState({error: true});
-            });
+    componentDidMount(){
+        this.props.onFetchCategories();
     }
 
     render() {
-        let categories = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
 
-        if (!this.state.error) {
-            categories = this.state.categories.map(category => {
+        let categories = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
+        if(this.props.fetchedCategories !== null){
+            categories = this.props.fetchedCategories.map(category => {
                 return <Category name={category.name} key={category.name}>{category.name}</Category>;
             });
         }
@@ -42,4 +30,16 @@ class Categories extends Component {
     }
 }
 
-export default Categories;
+const mapStateToProps = state => {
+    return {
+        fetchedCategories: state.category.categories
+    }
+}
+
+const mapActionsToProps = dispatch => {
+    return {
+        onFetchCategories: () => dispatch(actions.fetchCategories())
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Categories);
