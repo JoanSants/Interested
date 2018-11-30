@@ -5,9 +5,9 @@ import styles from './interest.module.css';
 const interest = props => {
     return (
         <Card className={styles.Card} header={<CardTitle reveal image={props.interestImage} waves='light' />}
-            title="Card Title"
-            reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
-            <p>This is a link</p>
+            title={props.name}
+            reveal={<p>{props.description}</p>}>
+            {'R$' + props.price + ',00'}
         </Card>
     )
 }

@@ -4,6 +4,11 @@
     margin: 15px;
 }
 
+.info {
+    max-height: 200px;
+    max-width: 28%;
+}
+
 @media(max-width:500px){
     .Card{
         width: 100%

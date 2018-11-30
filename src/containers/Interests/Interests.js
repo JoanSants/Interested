@@ -1,75 +1,55 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 import Interest from '../../components/Interest/Interest';
 import styles from './interests.module.css';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Interests extends Component {
-    render(){
-        return(
+
+    componentDidMount() {
+        this.props.onFetchInterests();
+    }
+
+    render() {
+        let interests = null;
+
+        if(this.props.fetchingInterests){
+            interests = <Spinner/>
+        }
+
+        if (this.props.interests !== null && this.props.interests.length > 0) {
+            interests = this.props.interests.map(interest => {
+                return <Interest
+                    key={interest._id}
+                    name={interest.name}
+                    interestImage={interest.image}
+                    price={interest.price}
+                    description={interest.description}
+                />
+            })
+        }
+
+        return (
             <div className={styles.Interests}>
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
-            <Interest
-                name={'Playstation 4'}
-                interestImage={'https://i5.walmartimages.com/asr/33de3a32-863c-4457-9cce-1fb65036d73c_1.93c6433ebb65dc7ef7d0a3d30dee21fc.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF'}
-                price={'600'}
-                description={'Muito legal!'}
-            />
+                {interests}
             </div>
         )
     }
 }
 
-export default Interests;
+const mapStateToProps = state => {
+    return {
+        interests: state.interest.interests,
+        fetchingInterests: state.interest.loading  
+    }
+}
+
+const mapActionsToProps = dispatch => {
+    return {
+        onFetchInterests: () => dispatch(actions.fetchInterests())
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Interests);
