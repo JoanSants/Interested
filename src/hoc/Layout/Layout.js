@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Aux from '../Auxiliary/Auxiliary';
 import Navbar from '../../components/Navigation/Navbar/Navbar';
@@ -7,17 +8,22 @@ import styles from './Layout.module.css';
 
 class Layout extends Component {
 
-    render(){
+    render() {
         return (
-            <Aux> 
-                <Navbar/>
+            <Aux>
+                <Navbar isAuthenticated={this.props.isAuthenticated}/>
                 <main className={styles.Content}>
                     {this.props.children}
                 </main>
-                <Footer/>
+                <Footer />
             </Aux>
         )
     }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated:state.auth.token !== null
+    }
+}
+export default connect(mapStateToProps, null)(Layout);

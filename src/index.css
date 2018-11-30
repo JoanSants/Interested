@@ -33,3 +33,14 @@ nav .nav-wrapper {
 footer.page-footer {
   background-color: #800000;
 }
+
+/* Interest */
+
+img.activator {
+  max-height: 200px;
+}
+
+.card .card-image img {
+  width: unset;
+  margin: auto;
+}
