@@ -6,7 +6,7 @@ import NavigationItems from '../NavigationItems/NavigationItems'
 const navbar = props => {
     return (
         <Navbar brand='Interessados' right>
-            <NavigationItems/>
+            <NavigationItems isAuth={props.isAuthenticated}/>
         </Navbar>
     )
 }

@@ -8,6 +8,9 @@ const navigationItems = props => {
         <ul>
             <NavigationItem link='/add-interest'>Em comprar</NavigationItem>
             <NavigationItem link='/add-item'>Em vender</NavigationItem>
+            {!props.isAuth ? 
+                <NavigationItem link='/authenticate'>Entrar</NavigationItem> : 
+                <NavigationItem link='/logout'>Sair</NavigationItem> }
             <Categories/>
         </ul>
     )
