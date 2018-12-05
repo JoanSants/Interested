@@ -39,12 +39,6 @@ const input = ( props ) => {
                 </select>
             );
             break;
-        case ('file'):
-            inputElement = <input
-                className={inputClasses.join(' ')}
-                {...props.elementConfig}
-                onChange={props.changed} />;
-            break;
         default:
             inputElement = <input
                 className={inputClasses.join(' ')}

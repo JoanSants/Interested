@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import axios from '../../axios';
 
 import Interest from '../../components/Interest/Interest';
 import styles from './interests.module.css';
@@ -12,6 +13,15 @@ class Interests extends Component {
         this.props.onFetchInterests();
     }
 
+    postContactHandler = (id) => {
+        const body = {
+            _interest:id
+        }
+        axios.post('/users/contact', body, {headers:{
+            "x-auth":this.props.token
+        }})
+    }
+
     render() {
         let interests = null;
 
@@ -21,15 +31,17 @@ class Interests extends Component {
 
         if (this.props.interests !== null && this.props.interests.length > 0) {
             interests = this.props.interests.map(interest => {
-                return <Interest
+                return <Interest 
                     key={interest._id}
+                    id={interest._id}
                     name={interest.name}
-                    interestImage={interest.image}
                     price={interest.price}
                     description={interest.description}
+                    postContactHandler={(id) => {this.postContactHandler(id)}}
                 />
             })
         }
+
 
         return (
             <div className={styles.Interests}>
@@ -42,7 +54,8 @@ class Interests extends Component {
 const mapStateToProps = state => {
     return {
         interests: state.interest.interests,
-        fetchingInterests: state.interest.loading  
+        fetchingInterests: state.interest.loading,
+        token: state.auth.token
     }
 }
 

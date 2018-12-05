@@ -91,18 +91,6 @@ class AddInterest extends Component {
                 value: '',
                 validation: {},
                 valid: false
-            },
-            interestImage: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'file',
-                    placeholder: 'imagem do Interesse'
-                },
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
             }
         },
         formIsValid: false
@@ -111,30 +99,21 @@ class AddInterest extends Component {
     addInterestHandler = (event) => {
         event.preventDefault();
 
-        const formData = new FormData();
+        const interest = {};
         for (let formElementIdentifier in this.state.interestForm) {
-            formData.append(formElementIdentifier, this.state.interestForm[formElementIdentifier].value)
+            interest[formElementIdentifier] = this.state.interestForm[formElementIdentifier].value;
         }
-        const interest = formData;
 
         this.props.onAddInterest(interest, this.props.token);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
         let updatedFormElement = null;
-        if(inputIdentifier === 'interestImage'){
-            updatedFormElement = updateObject(this.state.interestForm[inputIdentifier], {
-                value: event.target.files[0],
-                valid: checkValidity(event.target.value, this.state.interestForm[inputIdentifier].validation),
-                touched: true
-            });
-        }else{
             updatedFormElement = updateObject(this.state.interestForm[inputIdentifier], {
                 value: event.target.value,
                 valid: checkValidity(event.target.value, this.state.interestForm[inputIdentifier].validation),
                 touched: true
             });
-        }
 
         const updatedInterestForm = updateObject(this.state.interestForm, {
             [inputIdentifier]: updatedFormElement
@@ -159,17 +138,7 @@ class AddInterest extends Component {
         let form = (
             <form onSubmit={this.addInterestHandler}>
                 {formElementsArray.map(formElement => {
-                    if (formElement.config.elementType !== 'file') {
-                        return <Input
-                            key={formElement.id}
-                            elementType={formElement.config.elementType}
-                            elementConfig={formElement.config.elementConfig}
-                            invalid={!formElement.config.valid}
-                            shouldValidate={formElement.config.validation}
-                            touched={formElement.config.touched}
-                            changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                    }
-
+                    
                     return <Input
                         key={formElement.id}
                         elementType={formElement.config.elementType}
