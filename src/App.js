@@ -6,8 +6,13 @@ import * as actions from './store/actions/index';
 import Layout from './hoc/Layout/Layout';
 import Interests from './containers/Interests/Interests';
 import AddInterests from './containers/Interests/AddInterest/AddInterest';
+import MyInterests from './containers/Interests/MyInterests/MyInterests';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
+import Categories from './containers/Categories/Categories';
+import Keys from './containers/Keys/Keys';
+import Contact from './containers/Contacts/Contacts';
+import SignUp from './containers/Auth/SignUp/SignUp';
 
 class App extends Component {
 
@@ -20,6 +25,8 @@ class App extends Component {
       <Switch>
         <Route path='/authenticate' component={Auth} />
         <Route path='/add-interest' component={AddInterests} />
+        <Route path='/categories/:name' component={Categories} />
+        <Route path='/keys' component={Keys}/>
         <Route path='/' exact component={Interests} />
         <Redirect to='/'/>
       </Switch>
@@ -29,7 +36,12 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path='/add-interest' component={AddInterests} />
+          <Route path='/my-interests' component={MyInterests} />
+          <Route path='/categories/:name' component={Categories} />
           <Route path='/logout' component={Logout}/>
+          <Route path='/keys' component={Keys}/>
+          <Route path='/contacts' component={Contact} />
+          <Route path='/my-info' component={SignUp}/>
           <Route path='/' exact component={Interests} />
           <Redirect to='/'/>
         </Switch>

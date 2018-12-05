@@ -9,6 +9,7 @@ nav ul a {
 
 .btn {
   background-color: #800000;
+  margin: 1px;
 }
 
 .btn:hover {

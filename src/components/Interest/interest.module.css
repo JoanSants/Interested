@@ -4,6 +4,10 @@
     margin: 15px;
 }
 
+.btn{
+    width:100%;
+}
+
 .info {
     max-height: 200px;
     max-width: 28%;
