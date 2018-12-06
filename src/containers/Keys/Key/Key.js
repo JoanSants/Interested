@@ -5,12 +5,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { NavLink } from 'react-router-dom';
 
 const styles = {
     card: {
         minWidth: 275,
-        margin:'20px',
-        backgroundColor:'#eee'
+        display: 'inline-block',
+        width: '30%',
+        margin: '20px'
     },
     bullet: {
         display: 'inline-block',
@@ -37,7 +39,12 @@ const key = props => {
                 </Typography>
             </CardContent>
             <CardActions>
+                {props.isAuth 
+                ? 
                 <Button onClick={() => props.buyKey(props.id)}>Comprar Chave</Button>
+                :
+                <NavLink to='/authenticate'><Button>Realizar Login</Button></NavLink>
+                }
             </CardActions>
         </Card>
     )

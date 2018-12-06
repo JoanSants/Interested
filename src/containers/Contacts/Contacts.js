@@ -5,6 +5,7 @@ import Aux from '../../hoc/Auxiliary/Auxiliary';
 import ContactFragment from '../../components/Contact/Contact';
 import axios from '../../axios';
 import Modal from '../../components/UI/Modal/Modal';
+import Button from '@material-ui/core/Button';
 
 class Contact extends Component {
 
@@ -52,7 +53,7 @@ class Contact extends Component {
                 <h1>{this.state.userContact.fullName}</h1>
                 <p>telefone: {this.state.userContact.telephone}</p>
                 <p>celular: {this.state.userContact.cellphone}</p>
-                <p>Whatsapp: {this.state.userContact.useWhatsapp ? 'usa' : 'não'}</p>
+                <p>Whatsapp: {this.state.userContact.useWhatsapp ? <a href='https://api.whatsapp.com/send?phone=55119999988888&text=Ol%C3%A1,%20estou%20com%20d%C3%BAvida,%20pode%20me%20ajudar?' target='_blank'><Button>CONVERSAR</Button></a> : 'Não utiliza'}</p>
             </Modal>
         }
         return (

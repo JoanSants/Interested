@@ -4,11 +4,6 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
-.MuiAppBar-colorPrimary-11 {
-  color: #fff;
-  background-color: #800000 !important;
-}
-
 ul {
   padding: initial;
 }
@@ -46,7 +41,7 @@ form.defaultForm {
 }
 
 @media(min-width: 800px){
-  .MuiPaper-root-13 {
+  .card {
     display: inline-block
   }
 }

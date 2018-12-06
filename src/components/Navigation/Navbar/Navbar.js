@@ -21,6 +21,10 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
+    ToolBarBackGround: {
+        backgroundColor:'#800000',
+        color:'#fff'
+    }
 };
 
 const navbar = props => {
@@ -28,7 +32,7 @@ const navbar = props => {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar className={classes.ToolBarBackGround}>
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon onClick={props.drawerToggleClicked} />
                     </IconButton>

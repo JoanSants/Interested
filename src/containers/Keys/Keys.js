@@ -20,6 +20,9 @@ const styles = theme => ({
         marginRight: '20%',
         marginTop: '10px'
     },
+    mainInfo: {
+        fontSize:'20px'
+    }
 });
 
 
@@ -64,6 +67,7 @@ class Keys extends Component {
                     price={key.price}
                     quantity={key.quantity}
                     buyKey={(id) => { this.keyBoughtHandler(id) }}
+                    isAuth={this.props.isAuthenticated}
                 />
             });
 
@@ -74,8 +78,8 @@ class Keys extends Component {
         let keysQuantity = null;
         if (this.props.user) {
             keysQuantity = <Paper className={classes.root} elevation={1}>
-            <Typography component="p">
-                    Você tem {this.props.user.keys} chaves!
+            <Typography component="p" className={classes.mainInfo}>
+                    Você possui <b>{this.props.user.keys}</b> chaves!
             </Typography>
             </Paper>
         }
@@ -93,7 +97,8 @@ class Keys extends Component {
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        user: state.auth.user
+        user: state.auth.user,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
