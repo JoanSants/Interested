@@ -23,10 +23,29 @@ export const authFail = (error) => {
     };
 };
 
+export const fetchUserStart = () => {
+    return {
+        type: actionTypes.FETCH_USER_START
+    };
+};
+
+export const fetchUserSuccess = (user) => {
+    return {
+        type: actionTypes.FETCH_USER_SUCCESS,
+        user: user
+    };
+};
+
+export const fetchUserFail = (error) => {
+    return {
+        type: actionTypes.FETCH_USER_FAIL,
+        error: error
+    };
+};
+
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
-    localStorage.removeItem('user');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -50,19 +69,15 @@ export const auth = (authData, isSignup) => {
 
         axios.post(url, authData)
             .then(response => {
-
-                if(response.status === 401){
-                    return dispatch(authFail(response.data.message));
-                }
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('expirationDate', expirationDate);
-                localStorage.setItem('user', JSON.stringify(response.data.user));
-                dispatch(authSuccess(response.data.token, response.data.user));
+                dispatch(authSuccess(response.data.token));
+                dispatch(fetchUserData(response.data.token));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(err => {
-                dispatch(authFail(err.response.data.error));
+                dispatch(authFail(err.response.data.error.message));
             });
     };
 };
@@ -77,10 +92,23 @@ export const authCheckState = () => {
             if (expirationDate <= new Date()) {
                 dispatch(logout());
             } else {
-                const user = JSON.parse(localStorage.getItem('user'));
-                dispatch(authSuccess(token, user));
+                dispatch(authSuccess(token));
+                dispatch(fetchUserData(token))
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
             }   
         }
     };
 };
+
+export const fetchUserData = (token) => {
+    return dispatch => {
+        dispatch(authStart());
+        axios.get('/users', {headers:{
+            "x-auth": token
+        }}).then(response => {
+            dispatch(fetchUserSuccess(response.data.user));
+        }).catch(err => {
+            dispatch(fetchUserFail(err.response.data.error.message));
+        })
+    }
+}

@@ -123,21 +123,6 @@ class SignUp extends Component {
                 },
                 valid: false,
                 touched: false
-            }, cpf: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'CPF'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    minLength: 11,
-                    maxLength: 11,
-                    isNumeric: true
-                },
-                valid: false,
-                touched: false
             }, telephone: {
                 elementType: 'input',
                 elementConfig: {
@@ -181,7 +166,8 @@ class SignUp extends Component {
                 valid: true
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        signUpRequested: false
     }
 
     switchAuthModeHandler = () => (
@@ -199,6 +185,7 @@ class SignUp extends Component {
         const signUpData = formData;
 
         this.props.onSignUp(signUpData, true, false);
+        this.setState({signUpRequested: true});
     }
 
     editDataHandler = (event) => {
@@ -272,7 +259,7 @@ class SignUp extends Component {
 
         return (
             <div className={styles.ContactData}>
-                {this.props.error ? this.props.error : null}
+                {this.props.error && this.state.signUpRequested ? this.props.error : null}
                 <h4>Dados para Cadastro</h4>
                 {form}
             </div>

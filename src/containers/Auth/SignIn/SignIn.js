@@ -41,7 +41,8 @@ class SignIn extends Component {
                 touched: false
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        SignInRequested: false
     }
 
     switchAuthModeHandler = (event) => {
@@ -59,6 +60,7 @@ class SignIn extends Component {
         const signInData = formData;
 
         this.props.onSignIn(signInData, false);
+        this.setState({SignInRequested: true});
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
