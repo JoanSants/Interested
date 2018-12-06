@@ -162,7 +162,7 @@ class AddInterest extends Component {
             {this.props.userMessage ?
                     <Paper className={classes.root} elevation={1}>
                         <Typography component="p">
-                            {this.props.userMessage}
+                            {this.state.userMessage}
                         </Typography>
                     </Paper>
                     : null}
