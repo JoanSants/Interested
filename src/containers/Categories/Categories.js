@@ -10,6 +10,10 @@ import Spinner from '../../components/UI/Spinner//Spinner';
 
 class Categories extends Component {
 
+    state={
+        error: null
+    }
+
     componentDidMount() {
         this.props.onInitInterests();
     }
@@ -20,7 +24,9 @@ class Categories extends Component {
         }
         axios.post('/users/contact', body, {headers:{
             "x-auth":this.props.token
-        }})
+        }}).then().catch(err => {
+            this.setState({error: err.response.data.error.message})
+        })
     }
 
     render() {
@@ -50,6 +56,7 @@ class Categories extends Component {
                         price={interest.price}
                         description={interest.description}
                         postContactHandler={(id) => {this.postContactHandler(id)}}
+                        error={this.state.error}
                     />
                 }else{
                     return null;
@@ -75,7 +82,8 @@ class Categories extends Component {
 const mapStateToProps = state => {
     return {
         categories: state.category.categories,
-        interests: state.interest.interests
+        interests: state.interest.interests,
+        token: state.auth.token
     }
 }
 

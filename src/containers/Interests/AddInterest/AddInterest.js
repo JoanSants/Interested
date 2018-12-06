@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-materialize';
+import  Button  from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -9,7 +9,6 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions';
 import { checkValidity, updateObject } from '../../../shared/utility';
-import styles from './AddInterest.module.css';
 
 
 class AddInterest extends Component {
@@ -149,7 +148,6 @@ class AddInterest extends Component {
         let form = (
             <form onSubmit={this.addInterestHandler}>
                 {formElementsArray.map(formElement => {
-
                     return <Input
                         key={formElement.id}
                         elementType={formElement.config.elementType}
@@ -174,7 +172,7 @@ class AddInterest extends Component {
         }
 
         return (
-            <div className={styles.ContactData}>
+            <div>
                 {isAuthenticated}
                 {this.state.userMessage ? this.state.userMessage : null}
                 <h4>O que deseja comprar?</h4>

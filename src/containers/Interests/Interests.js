@@ -4,7 +4,6 @@ import * as actions from '../../store/actions/index';
 import axios from '../../axios';
 
 import Interest from '../../components/Interest/Interest';
-import styles from './interests.module.css';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Interests extends Component {
@@ -51,7 +50,7 @@ class Interests extends Component {
 
 
         return (
-            <div className={styles.Interests}>
+            <div>
                 {interests}
             </div>
         )

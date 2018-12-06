@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-materialize';
+import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import { checkValidity, updateObject } from '../../../shared/utility';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import * as actions from '../../../store/actions';
-import styles from './SignIn.module.css';
+
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
+});
 
 class SignIn extends Component {
     state = {
@@ -60,7 +70,7 @@ class SignIn extends Component {
         const signInData = formData;
 
         this.props.onSignIn(signInData, false);
-        this.setState({SignInRequested: true});
+        this.setState({ SignInRequested: true });
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -81,6 +91,7 @@ class SignIn extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         const formElementsArray = [];
         for (let key in this.state.controls) {
             formElementsArray.push({
@@ -90,7 +101,15 @@ class SignIn extends Component {
         }
 
         let form = (
-            <form onSubmit={this.signInDataHandler}>
+            <form className="defaultForm">
+                <h4>Insira os dados para Login</h4>
+                {this.props.error ?
+                    <Paper className={classes.root} elevation={1}>
+                        <Typography component="p">
+                            {this.props.error}
+                        </Typography>
+                    </Paper>
+                    : null}
                 {formElementsArray.map(formElement => {
                     return <Input
                         key={formElement.id}
@@ -102,7 +121,7 @@ class SignIn extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 })}
-                <Button disabled={!this.state.formIsValid}>ENVIAR</Button>
+                <Button disabled={!this.state.formIsValid} onClick={this.state.formIsValid ? this.signInDataHandler : null}>ENVIAR</Button>
                 <Button onClick={this.switchAuthModeHandler}>Cadastrar</Button>
             </form>
         );
@@ -116,10 +135,8 @@ class SignIn extends Component {
         }
 
         return (
-            <div className={styles.ContactData}>
-                {this.props.error ? this.props.error : null}
+            <div>
                 {authRedirect}
-                <h4>Insira os dados para Login</h4>
                 {form}
             </div>
         );
@@ -140,4 +157,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignIn));

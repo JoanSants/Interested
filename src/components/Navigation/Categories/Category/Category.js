@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {NavItem} from 'react-materialize'
+import MenuItem from '@material-ui/core/MenuItem';
 
 const category = props => {
     return(
-        <NavLink to={'/categories/' + props.name.toLowerCase()}>{props.children}<NavItem divider /></NavLink>
+        <NavLink to={'/categories/' + props.name.toLowerCase()}><MenuItem onClick={props.handleClose}>{props.children}</MenuItem></NavLink>
     )
 }
 

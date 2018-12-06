@@ -1,63 +1,87 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import axios from '../../axios';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import Key from './Key/Key';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import { fetchUserData } from '../../store/actions/auth';
 
-class Keys extends Component{
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+        display: 'block',
+        textAlign: 'center',
+        marginLeft: '20%',
+        marginRight: '20%',
+        marginTop: '10px'
+    },
+});
+
+
+class Keys extends Component {
 
     state = {
         keys: null,
         error: null
     }
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get('/keys').then(response => {
-            this.setState({keys: response.data.keys});
+            this.setState({ keys: response.data.keys });
         }).catch(err => {
-            this.setState({error: err});
+            this.setState({ error: err });
         });
     }
 
     keyBoughtHandler = (id) => {
-        const body = { "key":id }
-        axios.post('/keys/buy', body, {headers:{
-            "x-auth": this.props.token
-        }}).then(response => {
+        const body = { "key": id }
+        axios.post('/keys/buy', body, {
+            headers: {
+                "x-auth": this.props.token
+            }
+        }).then(response => {
             this.props.onFetchUser(this.props.token);
         }).catch(err => {
-            this.setState({error: err.response.data.message});
+            this.setState({ error: err.response.data.message });
         })
     }
 
-    render(){
+    render() {
+        const { classes } = this.props;
         let keys = null;
-        if(this.state.keys){
+        if (this.state.keys) {
             keys = this.state.keys.map(key => {
-                return <Key 
+                return <Key
                     key={key._id}
                     id={key._id}
                     name={key.name}
                     description={key.description}
                     price={key.price}
                     quantity={key.quantity}
-                    buyKey={(id) => {this.keyBoughtHandler(id)}}
+                    buyKey={(id) => { this.keyBoughtHandler(id) }}
                 />
             });
 
-            if(keys.length === 0){
+            if (keys.length === 0) {
                 keys = <h5>Não possuímos chaves no momento, tente novamente mais tarde.</h5>
             }
         }
         let keysQuantity = null;
-        if(this.props.user){
-            keysQuantity = <h2>Você tem {this.props.user.keys} chaves</h2>
+        if (this.props.user) {
+            keysQuantity = <Paper className={classes.root} elevation={1}>
+            <Typography component="p">
+                    Você tem {this.props.user.keys} chaves!
+            </Typography>
+            </Paper>
         }
         return (
             <Aux>
-                <p>{this.state.error? this.state.error : null}</p>
+                <p>{this.state.error ? this.state.error : null}</p>
                 {keysQuantity}
                 {keys}
             </Aux>
@@ -74,9 +98,9 @@ const mapStateToProps = state => {
 }
 
 const mapActionsToProps = dispatch => {
-    return{
+    return {
         onFetchUser: (token) => dispatch(fetchUserData(token))
     }
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(Keys);
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Keys));

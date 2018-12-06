@@ -1,9 +1,49 @@
 import React from 'react';
-import {Preloader} from 'react-materialize';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+});
 
-const spinner = () => (
-    <Preloader size='big'/>
-);
+class CircularDeterminate extends React.Component {
+  state = {
+    completed: 0,
+  };
 
-export default spinner;
+  componentDidMount() {
+    this.timer = setInterval(this.progress, 20);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  progress = () => {
+    const { completed } = this.state;
+    this.setState({ completed: completed >= 100 ? 0 : completed + 1 });
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div style={{textAlign:'center'}}>
+        <CircularProgress
+          className={classes.progress}
+          variant="determinate"
+          value={this.state.completed}
+          color="#800000"
+        />
+      </div>
+    );
+  }
+}
+
+CircularDeterminate.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(CircularDeterminate);

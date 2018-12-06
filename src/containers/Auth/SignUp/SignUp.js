@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-materialize';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import styles from './SignUp.module.css';
 import * as actions from '../../../store/actions';
 import { checkValidity, updateObject } from '../../../shared/utility';
 import axios from '../../../axios';
+
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
+});
 
 class SignUp extends Component {
     state = {
@@ -185,7 +196,7 @@ class SignUp extends Component {
         const signUpData = formData;
 
         this.props.onSignUp(signUpData, true, false);
-        this.setState({signUpRequested: true});
+        this.setState({ signUpRequested: true });
     }
 
     editDataHandler = (event) => {
@@ -197,9 +208,11 @@ class SignUp extends Component {
         }
         const editData = formData;
 
-        axios.patch('/users', editData, {headers:{
-            "x-auth":this.props.token
-        }})
+        axios.patch('/users', editData, {
+            headers: {
+                "x-auth": this.props.token
+            }
+        })
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -219,14 +232,15 @@ class SignUp extends Component {
         for (let inputIdentifier in updatedControls) {
             formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
         }
-        if(this.props.isAuthenticated){
+        if (this.props.isAuthenticated) {
             this.setState({ editControls: updatedControls, formIsValid: formIsValid });
-        }else{
+        } else {
             this.setState({ controls: updatedControls, formIsValid: formIsValid });
         }
     }
 
     render() {
+        const { classes } = this.props;
         const formElementsArray = [];
         const controls = this.props.isAuthenticated ? this.state.editControls : this.state.controls;
         for (let key in controls) {
@@ -237,7 +251,15 @@ class SignUp extends Component {
         }
 
         let form = (
-            <form onSubmit={this.props.isAuthenticated ? this.editDataHandler : this.signUpDataHandler}>
+            <form className="defaultForm">
+                <h4>Dados para Cadastro</h4>
+                {this.props.error ?
+                    <Paper className={classes.root} elevation={1}>
+                        <Typography component="p">
+                            {this.props.error}
+                        </Typography>
+                    </Paper>
+                    : null}
                 {formElementsArray.map(formElement => {
                     return <Input
                         key={formElement.id}
@@ -249,7 +271,7 @@ class SignUp extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 })}
-                <Button disabled={!this.state.formIsValid}>ENVIAR</Button>
+                <Button disabled={!this.state.formIsValid} onClick={this.state.formIsValid ? this.props.isAuthenticated ? this.editDataHandler : this.signUpDataHandler : null}>ENVIAR</Button>
                 <Button onClick={this.switchAuthModeHandler}>LOGIN</Button>
             </form>
         );
@@ -258,9 +280,7 @@ class SignUp extends Component {
         }
 
         return (
-            <div className={styles.ContactData}>
-                {this.props.error && this.state.signUpRequested ? this.props.error : null}
-                <h4>Dados para Cadastro</h4>
+            <div>
                 {form}
             </div>
         );
@@ -282,4 +302,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignUp));

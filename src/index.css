@@ -1,47 +1,53 @@
-nav {
-  background-color: #eee;
-  color: #800000;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
 }
 
-nav ul a {
-  color:#800000;
+.MuiAppBar-colorPrimary-11 {
+  color: #fff;
+  background-color: #800000 !important;
 }
 
-.btn {
-  background-color: #800000;
-  margin: 1px;
+ul {
+  padding: initial;
 }
 
-.btn:hover {
-  background-color: #560000;
+a.active {
+  text-decoration: none;
+  color: inherit;
 }
 
-nav .brand-logo {
-  color: #800000;
-  font-family: 'Grand Hotel', cursive; 
+a{
+  text-decoration: none;
+  color: inherit;
 }
 
-nav .button-collapse i {  
-  color: maroon;
-}
-
-nav .nav-wrapper {
-  padding: 0 5% 0 5%;
-}
-
-/*Footer*/
-
-footer.page-footer {
-  background-color: #800000;
-}
-
-/* Interest */
-
-img.activator {
-  max-height: 200px;
-}
-
-.card .card-image img {
-  width: unset;
+form.defaultForm {
+  width: 80%;
   margin: auto;
+  background: #eee;
+  border-radius: 10px;
+  padding: 20px;
 }
+
+.defaultForm input {
+  border-radius: 10px;
+  border: none;
+}
+
+form.defaultForm {
+  width: 80%;
+  margin: auto;
+  background: #eee;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 5%;
+}
+
+@media(min-width: 800px){
+  .MuiPaper-root-13 {
+    display: inline-block
+  }
+}
+  
