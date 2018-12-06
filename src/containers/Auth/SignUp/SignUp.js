@@ -178,7 +178,8 @@ class SignUp extends Component {
             }
         },
         formIsValid: false,
-        signUpRequested: false
+        signUpRequested: false,
+        error: null
     }
 
     switchAuthModeHandler = () => (
@@ -255,10 +256,10 @@ class SignUp extends Component {
         let form = (
             <form className="defaultForm">
                 <h4>Dados para Cadastro</h4>
-                {this.props.error ?
+                {this.state.error ?
                     <Paper className={classes.root} elevation={1}>
                         <Typography component="p">
-                            {this.props.error}
+                            {this.state.error}
                         </Typography>
                     </Paper>
                     : null}
