@@ -177,7 +177,7 @@ class AddInterest extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 })}
-                <Button disabled={!this.state.formIsValid}>ADICIONAR INTERESSE</Button>
+                <Button disabled={!this.state.formIsValid} onClick={this.addInterestHandler}>ADICIONAR INTERESSE</Button>
             </form>
         );
         if (this.props.loading) {
