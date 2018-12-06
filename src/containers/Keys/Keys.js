@@ -28,7 +28,7 @@ class Keys extends Component{
         }}).then(response => {
             this.props.onFetchUser(this.props.token);
         }).catch(err => {
-            this.setState({error: err.response.data.error.message});
+            this.setState({error: err.response.data.message});
         })
     }
 
@@ -57,6 +57,7 @@ class Keys extends Component{
         }
         return (
             <Aux>
+                <p>{this.state.error? this.state.error : null}</p>
                 {keysQuantity}
                 {keys}
             </Aux>
