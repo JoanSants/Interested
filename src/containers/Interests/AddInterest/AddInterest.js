@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import  Button  from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import axios from '../../../axios';
 import Input from '../../../components/UI/Input/Input';
@@ -10,9 +13,15 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions';
 import { checkValidity, updateObject } from '../../../shared/utility';
 
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
+});
 
 class AddInterest extends Component {
-
     componentDidMount() {
         let options = [];
         if (this.props.categories !== null) {
@@ -137,6 +146,8 @@ class AddInterest extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+        
         const formElementsArray = [];
         for (let key in this.state.interestForm) {
             formElementsArray.push({
@@ -146,7 +157,15 @@ class AddInterest extends Component {
         }
 
         let form = (
-            <form onSubmit={this.addInterestHandler}>
+            <form onSubmit={this.addInterestHandler} className="defaultForm">
+            <h4>O que deseja comprar?</h4>
+            {this.props.userMessage ?
+                    <Paper className={classes.root} elevation={1}>
+                        <Typography component="p">
+                            {this.props.userMessage}
+                        </Typography>
+                    </Paper>
+                    : null}
                 {formElementsArray.map(formElement => {
                     return <Input
                         key={formElement.id}
@@ -174,8 +193,6 @@ class AddInterest extends Component {
         return (
             <div>
                 {isAuthenticated}
-                {this.state.userMessage ? this.state.userMessage : null}
-                <h4>O que deseja comprar?</h4>
                 {form}
             </div>
         );
@@ -197,4 +214,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(withErrorHandler(AddInterest, axios));
+export default connect(mapStateToProps, mapActionsToProps)(withErrorHandler(withStyles(styles)(AddInterest), axios));

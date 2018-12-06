@@ -156,5 +156,4 @@ const mapDispatchToProps = dispatch => {
         onSignIn: (signInData, isSignUp) => dispatch(actions.auth(signInData, isSignUp))
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignIn));
