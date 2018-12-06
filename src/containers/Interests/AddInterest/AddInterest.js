@@ -93,7 +93,8 @@ class AddInterest extends Component {
                 valid: false
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        userMessage: null
     }
 
     addInterestHandler = (event) => {
@@ -104,16 +105,26 @@ class AddInterest extends Component {
             interest[formElementIdentifier] = this.state.interestForm[formElementIdentifier].value;
         }
 
-        this.props.onAddInterest(interest, this.props.token);
+        axios.post('/interests', interest, {
+            headers: {
+                "x-auth": this.props.token
+            }
+        }).then((response) => {
+            this.setState({ userMessage: 'Interesse adicionado' });
+            this.props.onFetchUserData(this.props.token);
+        }).catch(err => {
+            this.setState({ userMessage: err.response.data.error.message });
+        });
+
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
         let updatedFormElement = null;
-            updatedFormElement = updateObject(this.state.interestForm[inputIdentifier], {
-                value: event.target.value,
-                valid: checkValidity(event.target.value, this.state.interestForm[inputIdentifier].validation),
-                touched: true
-            });
+        updatedFormElement = updateObject(this.state.interestForm[inputIdentifier], {
+            value: event.target.value,
+            valid: checkValidity(event.target.value, this.state.interestForm[inputIdentifier].validation),
+            touched: true
+        });
 
         const updatedInterestForm = updateObject(this.state.interestForm, {
             [inputIdentifier]: updatedFormElement
@@ -138,7 +149,7 @@ class AddInterest extends Component {
         let form = (
             <form onSubmit={this.addInterestHandler}>
                 {formElementsArray.map(formElement => {
-                    
+
                     return <Input
                         key={formElement.id}
                         elementType={formElement.config.elementType}
@@ -165,6 +176,7 @@ class AddInterest extends Component {
         return (
             <div className={styles.ContactData}>
                 {isAuthenticated}
+                {this.state.userMessage ? this.state.userMessage : null}
                 <h4>O que deseja comprar?</h4>
                 {form}
             </div>
@@ -174,7 +186,7 @@ class AddInterest extends Component {
 
 const mapActionsToProps = dispatch => {
     return {
-        onAddInterest: (interestData, token) => dispatch(actions.addInterest(interestData, token))
+        onFetchUserData: (token) => { dispatch(actions.fetchUserData(token)) }
     }
 }
 

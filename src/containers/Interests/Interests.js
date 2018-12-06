@@ -9,6 +9,10 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Interests extends Component {
 
+    state = {
+        error: null
+    }
+
     componentDidMount() {
         this.props.onFetchInterests();
     }
@@ -19,7 +23,9 @@ class Interests extends Component {
         }
         axios.post('/users/contact', body, {headers:{
             "x-auth":this.props.token
-        }})
+        }}).then().catch(err => {
+            this.setState({error: err.response.data.error.message})
+        })
     }
 
     render() {
@@ -38,6 +44,7 @@ class Interests extends Component {
                     price={interest.price}
                     description={interest.description}
                     postContactHandler={(id) => {this.postContactHandler(id)}}
+                    error={this.state.error}
                 />
             })
         }

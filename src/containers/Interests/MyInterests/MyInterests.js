@@ -15,6 +15,7 @@ class MyInterests extends Component {
                     name={interest.name}
                     price={interest.price}
                     description={interest.description}
+                    myInterest={true}
                 />
             });
         }
