@@ -159,7 +159,7 @@ class AddInterest extends Component {
         let form = (
             <form onSubmit={this.addInterestHandler} className="defaultForm">
             <h4>O que deseja comprar?</h4>
-            {this.props.userMessage ?
+            {this.state.userMessage ?
                     <Paper className={classes.root} elevation={1}>
                         <Typography component="p">
                             {this.state.userMessage}
