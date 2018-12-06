@@ -272,7 +272,7 @@ class SignUp extends Component {
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 })}
                 <Button disabled={!this.state.formIsValid} onClick={this.state.formIsValid ? this.props.isAuthenticated ? this.editDataHandler : this.signUpDataHandler : null}>ENVIAR</Button>
-                <Button onClick={this.switchAuthModeHandler}>LOGIN</Button>
+                { this.props.isAuthenticated ? null : <Button onClick={this.switchAuthModeHandler}>LOGIN</Button>}
             </form>
         );
         if (this.props.loading) {
