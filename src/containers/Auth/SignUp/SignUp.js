@@ -212,6 +212,8 @@ class SignUp extends Component {
             headers: {
                 "x-auth": this.props.token
             }
+        }).then(response => {
+            this.setState({error: 'Dados alterados'})
         })
     }
 
