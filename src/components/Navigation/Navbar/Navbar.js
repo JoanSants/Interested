@@ -14,6 +14,8 @@ const styles = {
     },
     grow: {
         flexGrow: 1,
+        fontFamily:'Grand Hotel, cursive',
+        fontSize:'32px'
     },
     menuButton: {
         marginLeft: -12,

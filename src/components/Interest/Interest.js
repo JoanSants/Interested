@@ -71,7 +71,7 @@ class Interest extends Component {
                         </Typography>
 
                         <Typography component="p">
-                            {this.props.price},00
+                            {this.props.price}
                         </Typography>
                     </CardContent>
                     <CardActions>
