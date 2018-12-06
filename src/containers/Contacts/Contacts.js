@@ -51,8 +51,8 @@ class Contact extends Component {
                 modalClosed={this.showContactHandler}>
                 <h1>{this.state.userContact.fullName}</h1>
                 <p>telefone: {this.state.userContact.telephone}</p>
-                <p>celular:   {this.state.userContact.cellPhone}</p>
-                <p>use Whatsapp:   {this.state.userContact.useWhatsapp}</p>
+                <p>celular: {this.state.userContact.cellphone}</p>
+                <p>Whatsapp: {this.state.userContact.useWhatsapp ? 'usa' : 'não'}</p>
             </Modal>
         }
         return (

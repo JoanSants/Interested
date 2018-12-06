@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import Key from './Key/Key';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
+import { fetchUserData } from '../../store/actions/auth';
 
 class Keys extends Component{
 
@@ -21,12 +22,14 @@ class Keys extends Component{
     }
 
     keyBoughtHandler = (id) => {
-        const body = {
-            "key":id
-        }
+        const body = { "key":id }
         axios.post('/keys/buy', body, {headers:{
             "x-auth": this.props.token
-        }})
+        }}).then(response => {
+            this.props.onFetchUser(this.props.token);
+        }).catch(err => {
+            this.setState({error: err.response.data.error.message});
+        })
     }
 
     render(){
@@ -69,4 +72,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(Keys);
+const mapActionsToProps = dispatch => {
+    return{
+        onFetchUser: (token) => dispatch(fetchUserData(token))
+    }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Keys);

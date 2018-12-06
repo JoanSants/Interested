@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
+import axios from '../../axios';
 import * as actions from '../../store/actions/index';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Interest from '../../components/Interest/Interest';
@@ -11,6 +12,15 @@ class Categories extends Component {
 
     componentDidMount() {
         this.props.onInitInterests();
+    }
+
+    postContactHandler = (id) => {
+        const body = {
+            _interest:id
+        }
+        axios.post('/users/contact', body, {headers:{
+            "x-auth":this.props.token
+        }})
     }
 
     render() {
@@ -34,10 +44,12 @@ class Categories extends Component {
                 if (interest._category === selectedCategoryId) {
                     return <Interest
                         key={interest._id}
+                        id={interest._id}
                         name={interest.name}
                         interestImage={interest.image}
                         price={interest.price}
                         description={interest.description}
+                        postContactHandler={(id) => {this.postContactHandler(id)}}
                     />
                 }else{
                     return null;

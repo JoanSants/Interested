@@ -1,12 +1,12 @@
 export {
-    addInterest,
     fetchInterests
 } from './interest';
 
 export {
     auth,
     logout,
-    authCheckState
+    authCheckState,
+    fetchUserData
 } from './auth';
 
 export {

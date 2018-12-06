@@ -12,8 +12,8 @@ const navigationItems = props => {
             <Button>Minha Conta</Button>
         }>
             <NavLink to='/my-interests'>Meus Interesses<NavItem divider /></NavLink>
-            <NavLink to='/my-info'>Meus dados<NavItem divider /></NavLink>
-            <NavLink to='/contacts'>Contatos<NavItem divider /></NavLink>
+            <NavLink to='/contacts'>Meus Contatos<NavItem divider /></NavLink>
+            <NavLink to='/my-info'>Editar contato<NavItem divider /></NavLink>
             <NavLink to='/logout'>Sair<NavItem divider /></NavLink>
         </Dropdown>
     )
