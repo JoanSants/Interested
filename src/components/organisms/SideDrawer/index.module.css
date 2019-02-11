@@ -1,0 +1,8 @@
+.SideNav {
+  display: grid;
+  align-content: space-between;
+  background-color: var(--color-grey-dark-1);
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 3rem 0 3rem 0;
+}

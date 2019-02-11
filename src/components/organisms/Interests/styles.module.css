@@ -1,0 +1,7 @@
+.MyInterests {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-evenly;
+  padding: 3rem;
+  gap: 3rem;
+}

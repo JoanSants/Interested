@@ -1,0 +1,24 @@
+.Button {
+  font-size: 1.4rem;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: all .2s;
+  cursor: pointer;
+  display: block;  
+  outline: none;
+  box-shadow: var(--shadow-light);
+}
+
+.Button:hover {
+  background-color: var(--color-primary-dark);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-dark);
+}
+
+.Button:disabled {
+  background-color: var(--color-grey-dark-3);
+}

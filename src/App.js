@@ -3,21 +3,22 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from './store/actions/index';
-import Layout from './hoc/Layout/Layout';
-import Interests from './containers/Interests/Interests';
-import AddInterests from './containers/Interests/AddInterest/AddInterest';
-import MyInterests from './containers/Interests/MyInterests/MyInterests';
-import Auth from './containers/Auth/Auth';
-import Logout from './containers/Auth/Logout/Logout';
-import Categories from './containers/Categories/Categories';
-import Keys from './containers/Keys/Keys';
-import Contact from './containers/Contacts/Contacts';
-import SignUp from './containers/Auth/SignUp/SignUp';
+import Layout from './hoc/Layout';
+import Home from './components/pages/Home';
+import AddInterests from './components/pages/AddInterest';
+import MyInterests from './components/pages/MyInterests';
+import Auth from './components/pages/Auth';
+import Logout from './components/pages/Auth/Logout';
+import CategoryInterests from './components/pages/Categories';
+import MyCoins from './components/pages/MyCoins';
+import MyContacts from './components/pages/MyContacts';
+import MyInfo from './components/pages/MyInfo';
 
 class App extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.onTryAutoSignIn();
+    this.props.onInitInterests();
   }
 
   render() {
@@ -25,9 +26,9 @@ class App extends Component {
       <Switch>
         <Route path='/authenticate' component={Auth} />
         <Route path='/add-interest' component={AddInterests} />
-        <Route path='/categories/:name' component={Categories} />
-        <Route path='/keys' component={Keys}/>
-        <Route path='/' exact component={Interests} />
+        <Route path='/categories/:name' component={CategoryInterests} />
+        <Route path='/my-coins' component={MyCoins}/>
+        <Route path='/' exact component={Home} />
         <Redirect to='/'/>
       </Switch>
     )
@@ -37,20 +38,22 @@ class App extends Component {
         <Switch>
           <Route path='/add-interest' component={AddInterests} />
           <Route path='/my-interests' component={MyInterests} />
-          <Route path='/categories/:name' component={Categories} />
+          <Route path='/categories/:name' component={CategoryInterests} />
           <Route path='/logout' component={Logout}/>
-          <Route path='/keys' component={Keys}/>
-          <Route path='/contacts' component={Contact} />
-          <Route path='/my-info' component={SignUp}/>
-          <Route path='/' exact component={Interests} />
+          <Route path='/my-coins' component={MyCoins}/>
+          <Route path='/my-contacts' component={MyContacts} />
+          <Route path='/my-info' component={MyInfo}/>
+          <Route path='/' exact component={Home} />
           <Redirect to='/'/>
         </Switch>
       )
     }
     return (
-      <Layout>
-        {routes}
-      </Layout>
+      <div>
+        <Layout>
+          {routes}
+        </Layout>
+      </div>
     );
   }
 }
@@ -64,6 +67,7 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     onTryAutoSignIn: () => dispatch(actions.authCheckState()),
+    onInitInterests: () => dispatch(actions.fetchInterests())
   }
 }
 

@@ -1,0 +1,22 @@
+.DefaultFormBox {
+  display: grid;
+  width: 80%;
+  padding: 5rem;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: var(--shadow-light);
+  justify-items: center
+}
+  
+.DefaultForm {
+  display: grid;
+  gap: 3rem;
+  justify-items: left;
+}
+
+.DefaultFormButtonBox {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 3rem;
+}
+

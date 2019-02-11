@@ -1,0 +1,7 @@
+.CategoryContainer {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  list-style: none;
+  height: 100%;
+}

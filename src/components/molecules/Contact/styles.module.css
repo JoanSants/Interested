@@ -1,0 +1,32 @@
+.ContactBox {
+  display: grid;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: var(--shadow-light);
+  transition: all .2s;
+  color: var(--color-grey-dark-2);
+  overflow: hidden;
+  height: 100%;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+
+.ContactBox:hover {
+  transform: scale(1.010) translateY(-10px);
+}
+
+.ContactInfo {
+  text-align: center;
+  display: grid;
+  align-items: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--color-primary);
+}
+
+.ContactButtonBox {
+  display: grid;
+  justify-content: stretch;
+  align-self: end;
+}

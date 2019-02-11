@@ -1,0 +1,13 @@
+.CoinsSection {
+  text-align: center;
+}
+
+.CoinsBox {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-evenly;
+}
+
+.CoinsQuantity {
+
+}

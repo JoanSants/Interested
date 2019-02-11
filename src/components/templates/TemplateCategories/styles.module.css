@@ -1,0 +1,4 @@
+.Container {
+  display: grid;
+  grid-auto-columns: repeat(3, 1fr);
+}

@@ -1,0 +1,15 @@
+.SelectInput {
+  font-size: 1.5rem;
+  font-family: inherit;
+  color: inherit;
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  background-color: #fff;
+  border: none;
+  display: block;
+  transition: all .3s;  
+}
+
+.SelectInput:focus {
+  outline: none;
+}

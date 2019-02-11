@@ -1,0 +1,4 @@
+.Container {
+  display: grid;
+  justify-items: center;
+}

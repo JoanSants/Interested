@@ -1,0 +1,15 @@
+.NavBar {
+  padding-left: 4rem;
+  align-items: center;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  height: 8rem;
+  background-color: white;
+  border: var(--line);
+}
+
+.NavBar > * {
+  text-decoration: none;
+}

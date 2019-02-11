@@ -1,0 +1,17 @@
+.Fields {
+  position: relative;
+  width: 50%;
+}
+
+.Fields > input:focus ~ span {
+  top: 5.5rem;
+}
+
+.ErrorMessage {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  transition: all .3s;
+}

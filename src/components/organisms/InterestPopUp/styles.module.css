@@ -1,0 +1,110 @@
+.InterestPopupBack {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0, .8);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+}
+
+.InterestPopupOpenedBack {
+  opacity: 1;
+  visibility: visible;
+}
+
+.MainPopupContent{
+  width: 60%;
+  height: 70vh;
+  padding: 2rem;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "close close close close"
+                       "left left right right"
+                       "left left right right"
+                       "left left right right";
+  background-image: linear-gradient(to right bottom, var(--color-primary-light-rgb), var(--color-primary-dark-rgb)),url('https://cdn.wccftech.com/wp-content/uploads/2018/05/WCCFcontrollers2-740x429.jpg');
+  background-size: cover;
+}
+
+.MainPopupCloseButton{
+  grid-area: close;
+  justify-self: right;
+  align-items: center;
+  height: 3rem;
+  width: 3rem;
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  color: var(--color-primary);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all .2s;
+  font-weight: 600;
+  box-shadow: var(--shadow-light);
+}
+
+.MainPopupCloseButton:hover{
+  background-color: var(--color-primary);
+  color: #fff;
+  transform: scale(1.2);
+}
+
+.MainPopupInterest {
+  display: grid;
+  grid-area: left;
+  align-items: center;
+  justify-items: center;
+}
+
+.MainPopupContact {
+  display: grid;
+  grid-area: right;
+  align-items: center;
+  justify-items: center;
+}
+
+.InterestBox {
+  display: grid;
+  align-items: center;
+  justify-content	: center;
+  width: 80%;
+  height: 90%;
+  border-radius: 3px;
+  box-shadow: var(--shadow-dark);
+  background-color: #fff;
+  padding: 1rem;
+}
+
+.InterestInfo {
+  color: var(--color-primary);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.InterestInfo > p:last-of-type{
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.ContactBox {
+  display: grid;
+  align-items: center;
+  justify-items	: center;
+  width: 80%;
+  height: 90%;
+  border-radius: 3px;
+  padding: 1rem;
+  box-shadow: var(--shadow-dark);
+  background-color: #fff;
+  color: var(--color-primary);
+  text-align: center;
+}

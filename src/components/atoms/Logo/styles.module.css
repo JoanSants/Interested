@@ -1,0 +1,6 @@
+.Logo {
+  font-family: 'Grand Hotel', sans-serif;
+  font-size: 4rem;
+  color: var(--color-primary);
+  outline: none;
+}

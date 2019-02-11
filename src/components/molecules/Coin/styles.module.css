@@ -1,0 +1,44 @@
+.CoinBox {
+  width: 27rem;
+  padding: 3rem;
+  background-color: #fff;
+  border-radius: 3px;
+  display: grid;
+  box-shadow: var(--shadow-light);
+  transition: all .2s;
+}
+
+.CoinIcon > i {
+  color: var(--color-primary);
+  font-size: 5rem;
+  border-radius: 50%;
+  box-shadow: var(--shadow-light);
+}
+
+.CoinInfos {
+  font-size: 1.6rem;
+  color: var(--color-grey-dark-2);
+  margin: 2rem 0;
+}
+
+.CoinInfo {
+  font-weight: 600;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+.CoinMainInfo {
+  font-size: 8rem;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.CoinButtonBox {
+  justify-self: center;
+  align-self: center;
+}
+
+.CoinBox:hover{
+ transform: scale(1.025) translateY(-10px);
+ box-shadow: var(--shadow-dark);
+}

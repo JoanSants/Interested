@@ -1,0 +1,36 @@
+.SideDrawerItem {
+  display: block;
+  position: relative;
+  margin: 1rem 0 1rem 0;
+}
+
+.SideDrawerItem > a {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  color: var(--color-grey-light-1);
+  text-transform: uppercase;
+  padding-left: 3rem;
+  position: relative;
+  z-index: 10;
+  outline: none;
+  gap: 1.5rem;
+}
+
+.SideDrawerItem::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0;
+  background-color: var(--color-primary);
+  transition: all .2s;
+  transition-timing-function: ease-in;
+  z-index: 1;
+}
+
+.SideDrawerItem:hover::before {
+  height: 100%;
+  width: 100%;
+}
