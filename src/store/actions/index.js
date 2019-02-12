@@ -8,7 +8,3 @@ export {
     authCheckState,
     fetchUserData
 } from './auth';
-
-export {
-    fetchCategories
-} from './categories'

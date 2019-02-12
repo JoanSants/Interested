@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Categories from '../Categories';
 import Logo from '../../atoms/Logo';
 import styles from './index.module.css';
 import MyCoins from '../../atoms/MyCoins';
@@ -21,7 +20,6 @@ class Navbar extends Component {
         return (
             <header className={classes.join(" ")}>
                 <Logo />
-                <Categories />
                 {coins}
             </header>
         )

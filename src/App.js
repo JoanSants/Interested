@@ -9,7 +9,6 @@ import AddInterests from './components/pages/AddInterest';
 import MyInterests from './components/pages/MyInterests';
 import Auth from './components/pages/Auth';
 import Logout from './components/pages/Auth/Logout';
-import CategoryInterests from './components/pages/Categories';
 import MyCoins from './components/pages/MyCoins';
 import MyContacts from './components/pages/MyContacts';
 import MyInfo from './components/pages/MyInfo';
@@ -26,7 +25,6 @@ class App extends Component {
       <Switch>
         <Route path='/authenticate' component={Auth} />
         <Route path='/add-interest' component={AddInterests} />
-        <Route path='/categories/:name' component={CategoryInterests} />
         <Route path='/my-coins' component={MyCoins}/>
         <Route path='/' exact component={Home} />
         <Redirect to='/'/>
@@ -38,7 +36,6 @@ class App extends Component {
         <Switch>
           <Route path='/add-interest' component={AddInterests} />
           <Route path='/my-interests' component={MyInterests} />
-          <Route path='/categories/:name' component={CategoryInterests} />
           <Route path='/logout' component={Logout}/>
           <Route path='/my-coins' component={MyCoins}/>
           <Route path='/my-contacts' component={MyContacts} />
