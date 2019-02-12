@@ -3,38 +3,18 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import Spinner from '../../../atoms/Spinner';
-import Text from '../../../molecules/Fields/TextField'
-import Select from '../../../molecules/Fields/SelectField'
+import Text from '../../../molecules/Fields/TextField';
 import HeadingPrimary from '../../../atoms/Headers/HeadingPrimary';
 import Button from '../../../atoms/Buttons/Button';
 import { checkValidity, updateObject } from '../../../../shared/utility';
 import axios from '../../../../axios';
 import withErrorHandler from '../../../../hoc/withErrorHandler';
+import MainAdvice from '../../../atoms/Advices/MainAdvice';
 import styles from '../styles.module.css';
 
 import * as actions from '../../../../store/actions';
 
 class FormAddInterest extends Component {
-
-  componentDidMount() {
-    let options = [];
-    if (this.props.categories !== null) {
-      this.props.categories.map(category => {
-        return options.push({ value: category._id, displayValue: category.name });
-      });
-
-      const updatedformControls = {
-        ...this.state.formControls,
-        _category: {
-          ...this.state.formControls._category,
-          options
-          ,
-          value: options[0]
-        }
-      };
-      this.setState({ formControls: updatedformControls });
-    }
-  }
 
   state = {
     formControls: {
@@ -86,13 +66,6 @@ class FormAddInterest extends Component {
         validationMessage: 'Insira uma URL válida',
         isValid: false,
         wasTouched: false
-      },
-      _category: {
-        label: 'Categoria',
-        value: 'consoles',
-        options: [
-        ],
-        isValid: true
       }
     },
     isFormValid: false,
@@ -114,6 +87,7 @@ class FormAddInterest extends Component {
       }
     }).then((response) => {
       this.setState({ userMessage: 'Interesse adicionado' });
+      this.props.onInitInterests();
       this.props.onFetchUserData(this.props.token);
     }).catch(err => {
       this.setState({ userMessage: err.response.data.error.message });
@@ -149,7 +123,7 @@ class FormAddInterest extends Component {
 
         {this.state.userMessage
           ?
-          this.state.userMessage
+          <MainAdvice>this.state.userMessage</MainAdvice>
           :
           null
         }
@@ -194,13 +168,6 @@ class FormAddInterest extends Component {
           valid={this.state.formControls.urlImage.isValid}
         />
 
-        <Select
-          label={this.state.formControls._category.label}
-          options={this.state.formControls._category.options}
-          value={this.state.formControls._category.value}
-          onChange={(event) => this.inputChangedHandler(event, '_category')}
-        />
-
 
         <Button disabled={!this.state.isFormValid} clicked={this.addInterestHandler}>Adicionar Interesse</Button>
       </form>
@@ -220,7 +187,8 @@ class FormAddInterest extends Component {
       <div className={styles.DefaultFormBox}>
         {isAuthenticated}
         {form}
-      </div>);
+      </div>
+      );
   }
 
 
@@ -228,7 +196,8 @@ class FormAddInterest extends Component {
 
 const mapActionsToProps = dispatch => {
   return {
-    onFetchUserData: (token) => { dispatch(actions.fetchUserData(token)) }
+    onFetchUserData: (token) => { dispatch(actions.fetchUserData(token)) },
+    onInitInterests: () => dispatch(actions.fetchInterests())
   }
 }
 
@@ -236,8 +205,7 @@ const mapStateToProps = state => {
   return {
     loading: state.interest.loading,
     token: state.auth.token,
-    isAuthenticated: state.auth.token !== null,
-    categories: state.category.categories
+    isAuthenticated: state.auth.token !== null
   }
 }
 

@@ -1,6 +1,6 @@
 .Fields {
   position: relative;
-  width: 50%;
+  width: 80%;
 }
 
 .Fields > input:focus ~ span {

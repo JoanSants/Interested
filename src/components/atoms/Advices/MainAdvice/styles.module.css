@@ -1,6 +1,26 @@
 .MainAdvice {
+  font-size: 1.5rem;
   text-align: center;
-  color: var(--color-primary);
+  color: #fff;
   text-transform: uppercase;
   font-weight: 400;
+  background-color: var(--color-primary);
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  animation: sizeChange 1s infinite;
+}
+
+@keyframes sizeChange {
+  0%{
+    transform: scale(1.010);
+    box-shadow: var(--shadow-light);
+  }
+  50%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(1.010);
+    box-shadow: var(--shadow-light);
+  }
 }

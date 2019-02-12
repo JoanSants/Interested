@@ -3,11 +3,9 @@
 }
 
 .CoinsBox {
+
   display: grid;
   grid-auto-flow: column;
   justify-content: space-evenly;
-}
-
-.CoinsQuantity {
-
+  margin: 5rem 0;
 }

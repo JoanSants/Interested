@@ -11,6 +11,7 @@ import Text from '../../../molecules/Fields/TextField';
 import Select from '../../../molecules/Fields/SelectField';
 import HeadingPrimary from '../../../atoms/Headers/HeadingPrimary';
 import Button from '../../../atoms/Buttons/Button';
+import MainAdvice from '../../../atoms/Advices/MainAdvice';
 import styles from '../styles.module.css';
 
 class EditUserForm extends Component {
@@ -114,7 +115,7 @@ class EditUserForm extends Component {
     let form = (
       <form className={styles.DefaultForm}>
         <HeadingPrimary>Alterar dados de cadastro</HeadingPrimary>
-        {this.state.error ? <span>{this.state.error}</span> : null}
+        {this.state.error ? <MainAdvice>{this.state.error}</MainAdvice> : null}
 
         <Text
           label={this.state.editControls.fullName.label}
