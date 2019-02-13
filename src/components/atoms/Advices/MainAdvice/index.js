@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const MainAdvice = props => {
-  return <h1 className={styles.MainAdvice}>{props.children}</h1>
+  return <div className={styles.MainAdvice}><h1>{props.children}</h1></div>
 }
 
 export default MainAdvice;

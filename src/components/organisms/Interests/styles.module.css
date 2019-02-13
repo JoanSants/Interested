@@ -5,3 +5,18 @@
   padding: 3rem;
   gap: 3rem;
 }
+
+@media only screen and (max-width:50em) {
+  .MyInterests {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-around;
+    padding: 3rem;
+    gap: 3rem;
+  }
+}
+
+@media only screen and (max-width:31.25em) {
+  .MyInterests {
+    grid-template-columns: 1fr;
+  }
+}

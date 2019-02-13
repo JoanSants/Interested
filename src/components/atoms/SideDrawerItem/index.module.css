@@ -34,3 +34,18 @@
   height: 100%;
   width: 100%;
 }
+
+@media only screen and (max-width:37.5em) {
+  .SideDrawerItem {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .SideDrawerItem > a {
+    grid-auto-flow: row;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}

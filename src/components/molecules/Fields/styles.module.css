@@ -15,3 +15,23 @@
   left: 1rem;
   transition: all .3s;
 }
+
+@media only screen and (max-width:37.5em) {
+  .Fields {
+    width: 95%;
+  }
+  
+  .Fields > input:focus ~ span {
+    top: 5.5rem;
+  }
+  
+  .ErrorMessage {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    transition: all .3s;
+  }
+  
+}

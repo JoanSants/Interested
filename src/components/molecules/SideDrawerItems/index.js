@@ -26,15 +26,15 @@ const sideDrawerItems = ({ isAuthenticated }) => {
                 <Fragment>
                     <SideDrawerItem link='/my-interests'>
                         <i className="material-icons md-light">favorite</i>
-                        <span>Meus Interesses</span>
+                        <span>Interesses</span>
                     </SideDrawerItem>
                     <SideDrawerItem link='/my-contacts'>
                         <i className="material-icons md-light">account_box</i>
-                        <span>Meus Contatos</span>
+                        <span>Contatos</span>
                     </SideDrawerItem>
                     <SideDrawerItem link='/my-info'>
                         <i className="material-icons md-light">edit</i>
-                        <span>Editar contato</span>
+                        <span>Contato</span>
                     </SideDrawerItem>
                     <SideDrawerItem link='/logout'>
                         <i className="material-icons md-light">exit_to_app</i>

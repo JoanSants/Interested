@@ -2,3 +2,11 @@
   list-style: none;
   line-height: 6rem;
 }
+
+@media only screen and (max-width:37.5em) {
+  .SideDrawerItems {
+    display: grid;
+    line-height: 2rem;
+    grid-template-columns: repeat(3, minmax(min-content, 1fr));
+  }
+}

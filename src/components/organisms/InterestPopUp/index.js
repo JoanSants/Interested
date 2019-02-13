@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import axios from '../../../axios';
 import { Redirect } from 'react-router-dom';
 
-import HeadingPrimary from '../../atoms/Headers/HeadingPrimary';
 import HeadingSecondary from '../../atoms/Headers/HeadingSecondary';
 import Button from '../../atoms/Buttons/Button';
 import styles from './styles.module.css';
@@ -85,7 +84,7 @@ class InterestPopUp extends Component {
         interest = (
           <div className={styles.InterestBox}>
             <div className={styles.InterestInfo}>
-              <HeadingPrimary>{interest[0].name}</HeadingPrimary>
+              <HeadingSecondary>{interest[0].name}</HeadingSecondary>
               <p>{interest[0].description}</p>
               <p>R${interest[0].price},00</p>
             </div>
@@ -137,7 +136,7 @@ class InterestPopUp extends Component {
           </div>
           <div className={styles.MainPopupContact}>
             <div className={styles.ContactBox}>
-              <HeadingPrimary>Contato</HeadingPrimary>
+              <HeadingSecondary>Contato</HeadingSecondary>
               {contactInfo}
             </div>
           </div>

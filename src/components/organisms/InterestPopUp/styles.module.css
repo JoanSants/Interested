@@ -20,22 +20,18 @@
 }
 
 .MainPopupContent{
-  width: 60%;
-  height: 70vh;
+  width: 80%;
   padding: 2rem;
   border-radius: 3px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: "close close close close"
-                       "left left right right"
-                       "left left right right"
-                       "left left right right";
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 3rem;
   background-image: linear-gradient(to right bottom, var(--color-primary-light-rgb), var(--color-primary-dark-rgb)),url('https://cdn.wccftech.com/wp-content/uploads/2018/05/WCCFcontrollers2-740x429.jpg');
   background-size: cover;
 }
 
 .MainPopupCloseButton{
-  grid-area: close;
+  grid-column: 1 / -1;
   justify-self: right;
   align-items: center;
   height: 3rem;
@@ -59,14 +55,14 @@
 
 .MainPopupInterest {
   display: grid;
-  grid-area: left;
+  grid-column: 1 / 4;
   align-items: center;
   justify-items: center;
 }
 
 .MainPopupContact {
   display: grid;
-  grid-area: right;
+  grid-column: 4 / 7;
   align-items: center;
   justify-items: center;
 }
@@ -76,11 +72,11 @@
   align-items: center;
   justify-content	: center;
   width: 80%;
-  height: 90%;
+  height: 100%;
   border-radius: 3px;
   box-shadow: var(--shadow-dark);
   background-color: #fff;
-  padding: 1rem;
+  padding: 8rem 1rem
 }
 
 .InterestInfo {
@@ -100,11 +96,32 @@
   align-items: center;
   justify-items	: center;
   width: 80%;
-  height: 90%;
+  height: 100%;
   border-radius: 3px;
-  padding: 1rem;
   box-shadow: var(--shadow-dark);
   background-color: #fff;
   color: var(--color-primary);
   text-align: center;
+  padding: 8rem 1rem;
+}
+
+
+@media only screen and (max-width:37.5em) {
+  .MainPopupInterest {
+    grid-column: 1 / -1;
+    margin: 1rem;
+  }
+
+  .InterestBox{
+    padding: 1rem;
+  }
+
+  .MainPopupContact {
+    grid-column: 1 / -1;
+    margin: 1rem;
+  }
+
+  .ContactBox {
+    padding: 1rem;
+  }
 }

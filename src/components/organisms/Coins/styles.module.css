@@ -3,9 +3,16 @@
 }
 
 .CoinsBox {
-
   display: grid;
   grid-auto-flow: column;
   justify-content: space-evenly;
   margin: 5rem 0;
+}
+
+@media only screen and (max-width:37.5em) {
+  .CoinsBox {
+    grid-auto-flow: row;
+    justify-content: space-around;
+    margin: 5rem 0;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from '../../../axios';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,7 @@ class Coins extends Component {
         error: null,
         boughtKey: false
     }
-    
+
     //Obter Chaves
     componentDidMount() {
         axios.get('/keys').then(response => {
@@ -35,14 +35,14 @@ class Coins extends Component {
             }
         }).then(response => {
             this.props.onFetchUser(this.props.token);
-            this.setState({boughtKey: true});
+            this.setState({ boughtKey: true });
         }).catch(err => {
             this.setState({ error: err.response.data.message });
         })
     }
 
     render() {
-        let keys = <Spinner/>;
+        let keys = <Spinner />;
         if (this.state.keys) {
             keys = this.state.keys.map(key => {
                 return <Coin
@@ -61,20 +61,21 @@ class Coins extends Component {
                 keys = <h5>Não possuímos chaves no momento, tente novamente mais tarde.</h5>
             }
         }
-        
+
         return (
-            <section className={styles.CoinsSection}>
-                {this.state.error ? <p>this.state.error</p> : null}
+            <Fragment>
                 <HeadingPrimary>Coins</HeadingPrimary>
                 {
                     this.state.boughtKey ?
                         <MainAdvice>Chave comprada</MainAdvice>
-                    : null
+                        : null
                 }
-                <div className={styles.CoinsBox}>
-                    {keys}
-                </div>
-            </section>
+                <section className={styles.CoinsSection}>
+                    <div className={styles.CoinsBox}>
+                        {keys}
+                    </div>
+                </section>
+            </Fragment>
         )
     }
 

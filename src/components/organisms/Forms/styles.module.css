@@ -10,13 +10,25 @@
   
 .DefaultForm {
   display: grid;
-  gap: 3rem;
+  gap: 4rem;
   justify-items: left;
 }
 
 .DefaultFormButtonBox {
+  margin-top: 2rem;
   display: grid;
   grid-auto-flow: column;
   gap: 3rem;
+}
+
+@media only screen and (max-width:37.5em) {
+  .DefaultFormBox {
+    width: 100%;
+    padding: 2rem;
+  }
+    
+  .DefaultForm {
+    justify-items: center;
+  }
 }
 
