@@ -4,7 +4,6 @@ import Interest from '../../molecules/Interest';
 import Spinner from '../../atoms/Spinner';
 import styles from './interests.module.css';
 import InterestPopUp from '../../organisms/InterestPopUp';
-import HeadingSecondary from '../../atoms/Headers/HeadingSecondary';
 import MainAdvice from '../../atoms/Advices/MainAdvice';
 
 class Interests extends Component {

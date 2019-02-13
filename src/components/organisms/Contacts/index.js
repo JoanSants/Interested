@@ -6,6 +6,7 @@ import axios from '../../../axios';
 import ContactPopup from '../ContactPopup';
 import HeadingPrimary from '../../atoms/Headers/HeadingPrimary';
 import styles from './styles.module.css';
+import MainAdvice from '../../atoms/Advices/MainAdvice';
 
 class Contacts extends Component {
 
@@ -35,6 +36,7 @@ class Contacts extends Component {
 
     render() {
         let contacts = null;
+        let advice = null;
 
         if (this.props.contacts) {
             contacts = this.props.contacts.map(contact => {
@@ -45,6 +47,11 @@ class Contacts extends Component {
                     fetchConcact={(id) => { this.fetchContact(id) }}
                 />
             })
+
+            if(contacts.length === 0){
+                advice = <MainAdvice>Você não obteve contatos</MainAdvice>
+            }
+
         }
 
         let userContact = null;
@@ -55,6 +62,7 @@ class Contacts extends Component {
         return (
         <Fragment>
             <HeadingPrimary>Meus contatos</HeadingPrimary>
+            {advice}
             <section className={styles.ContactsSection}>
                 {userContact}
                 {contacts}

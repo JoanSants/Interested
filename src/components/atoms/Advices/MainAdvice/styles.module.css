@@ -5,7 +5,8 @@
   text-transform: uppercase;
   font-weight: 400;
   background-color: var(--color-primary);
-  display: inline-block;
+  display: flex;
+  justify-self: center;
   padding: 1rem 2rem;
   border-radius: 3px;
   animation: sizeChange 1s infinite;

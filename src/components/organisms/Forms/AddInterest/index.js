@@ -123,7 +123,7 @@ class FormAddInterest extends Component {
 
         {this.state.userMessage
           ?
-          <MainAdvice>this.state.userMessage</MainAdvice>
+          <MainAdvice>{this.state.userMessage}</MainAdvice>
           :
           null
         }
