@@ -44,10 +44,15 @@ body {
   background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100vh;
 }
 
 a {
   text-decoration: none;
 }
 
+@media only screen and (max-width:62.5em) {
+  body{
+    background-image: unset;
+    background-color: var(--color-grey-light-1);
+  }
+}

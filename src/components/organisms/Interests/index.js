@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './styles.module.css';
 import InterestPopUp from '../../organisms/InterestPopUp';
 import HeadingPrimary from '../../atoms/Headers/HeadingPrimary';
+import MainAdvice from '../../atoms/Advices/MainAdvice';
 
 import Interest from '../../molecules/Interest';
 
@@ -14,6 +15,7 @@ class MyInterests extends Component {
 
     render() {
         let myInterests;
+        let advice = null;
 
         if (this.props.myInterests !== null && this.props.myInterests.length > 0) {
             myInterests = this.props.myInterests.map(interest => {
@@ -26,12 +28,13 @@ class MyInterests extends Component {
         }
 
         if (this.props.myInterests !== null && this.props.myInterests.length === 0) {
-            myInterests = <h4>Você não possui interesses :(</h4>
+            advice = <MainAdvice>Você não possui interesses</MainAdvice>
         }
 
         return (
             <Fragment>
                 <HeadingPrimary>Meus Interesses</HeadingPrimary>
+                {advice}
                 <section className={styles.MyInterests}>
                     <InterestPopUp id={this.state.selectedInterest} />
                     {myInterests}

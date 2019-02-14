@@ -42,7 +42,7 @@ class Coins extends Component {
     }
 
     render() {
-        let keys = <Spinner />;
+        let keys = null;
         if (this.state.keys) {
             keys = this.state.keys.map(key => {
                 return <Coin
@@ -65,15 +65,14 @@ class Coins extends Component {
         return (
             <Fragment>
                 <HeadingPrimary>Coins</HeadingPrimary>
+                { keys == null ? <Spinner/> : null }
                 {
                     this.state.boughtKey ?
                         <MainAdvice>Chave comprada</MainAdvice>
                         : null
                 }
                 <section className={styles.CoinsSection}>
-                    <div className={styles.CoinsBox}>
-                        {keys}
-                    </div>
+                    {keys}
                 </section>
             </Fragment>
         )

@@ -1,8 +1,8 @@
 .LdsRing {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
+  display: grid;
+    position: relative;
+    height: 64px;
+    justify-items: center;
 }
 .LdsRing div {
   box-sizing: border-box;

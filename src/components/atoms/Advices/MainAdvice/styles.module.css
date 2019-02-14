@@ -9,12 +9,13 @@
   background-color: var(--color-primary);
 }
 
-.MainAdvice > h1 {
+.MainAdvice {
   font-size: 1.2rem;
+  text-align: center;
   color: #fff;
   text-transform: uppercase;
   font-weight: 400;
-  display: flex;
+  display: grid;
   justify-self: center;
 }
 
@@ -29,13 +30,5 @@
   100%{
     transform: scale(1.010);
     box-shadow: var(--shadow-light);
-  }
-}
-
-@media only screen and (max-width:37.5em) {
-  .CoinsBox {
-    grid-auto-flow: row;
-    justify-content: space-around;
-    margin: 5rem 0;
   }
 }

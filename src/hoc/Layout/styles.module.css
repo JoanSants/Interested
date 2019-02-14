@@ -6,8 +6,8 @@
   box-shadow: var(--shadow-dark);
   border-radius: 3px;
   overflow: hidden;
-  
-  grid-template-columns: minmax(min-content,20%) repeat(3, 1fr);
+  position: relative;
+  grid-template-columns: minmax( min-content , 25% ) repeat(3, 1fr);
 }
 
 .Nav {
@@ -27,10 +27,9 @@
   .Container {
     margin: 0;
     width: 100%;
+    box-shadow: none;
   }
-}
 
-@media only screen and (max-width:37.5em) {
   .SideNav {
     grid-column: 1 / -1;
   }

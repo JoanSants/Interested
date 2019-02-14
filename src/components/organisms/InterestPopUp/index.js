@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../../axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
+import * as actions from '../../../store/actions';
 
 import HeadingSecondary from '../../atoms/Headers/HeadingSecondary';
 import Button from '../../atoms/Buttons/Button';
@@ -49,7 +50,8 @@ class InterestPopUp extends Component {
         "x-auth": this.props.token
       }
     }).then(response => {
-      this.setState({ userContact: response.data.userContact });
+      this.props.onFetchUser(this.props.token);
+      this.setState({ userContact: response.data.user });
     }).catch(err => {
       this.setState({ error: err.response.data.error.message })
     })
@@ -110,9 +112,12 @@ class InterestPopUp extends Component {
         if (this.props.user !== null) {
           contactInfo = this.props.user.contacts.filter(contact => contact._id === this.state.interestId);
           if (contactInfo.length > 0) {
-            console.log(contactInfo[0]._id);
             contactInfo = <Button onClick={(id) => { this.FetchContact(this.state.interestId) }}>Ver Contato</Button>
           } else {
+            if(this.props.user.keys < 1){
+              contactInfo = <NavLink to="/keys"><Button>Comprar chaves</Button></NavLink>
+            }
+
             contactInfo = <Button onClick={(id) => { this.PostContactHandler(this.state.interestId) }}>Obter Contato</Button>
           }
         }
@@ -150,8 +155,14 @@ const MapStateToProps = state => {
   return {
     user: state.auth.user,
     isAuthenticated: state.auth.token !== null,
-    interests: state.interest.interests,
-    token: state.auth.token
+    token: state.auth.token,
+    interests: state.interest.interests
   }
 }
-export default connect(MapStateToProps)(InterestPopUp);
+
+const MapActionsToProps = dispatch => {
+  return {
+    onFetchUser: (token) => dispatch(actions.fetchUserData(token))
+  }
+}
+export default connect(MapStateToProps, MapActionsToProps)(InterestPopUp);

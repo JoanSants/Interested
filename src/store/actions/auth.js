@@ -62,9 +62,9 @@ export const checkAuthTimeout = (expirationTime) => {
 export const auth = (authData, isSignup) => {
     return dispatch => {
         dispatch(authStart());
-        let url = 'https://interested-api.herokuapp.com/users/signup';
+        let url = 'https://interessadosapi.herokuapp.com/users/signup';
         if (!isSignup) {
-            url = 'https://interested-api.herokuapp.com/users/signin';
+            url = 'https://interessadosapi.herokuapp.com/users/signin';
         }
 
         axios.post(url, authData)

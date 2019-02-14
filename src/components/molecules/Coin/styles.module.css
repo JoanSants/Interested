@@ -1,9 +1,11 @@
 .CoinBox {
-  width: 27rem;
+  display: grid;
+  justify-self: center;
+  text-align: center;
+  width: 90%;
   padding: 3rem;
   background-color: #fff;
   border-radius: 3px;
-  display: grid;
   box-shadow: var(--shadow-light);
   transition: all .2s;
 }
@@ -41,10 +43,4 @@
 .CoinBox:hover{
  transform: scale(1.025) translateY(-10px);
  box-shadow: var(--shadow-dark);
-}
-
-@media only screen and (max-width:37.5em) {
-  .CoinBox {
-    margin: 3rem 0;
-  }
 }
